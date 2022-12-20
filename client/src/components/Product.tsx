@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { IProduct } from "../types/IProduct";
+import Rating from "./Rating";
 
 interface IProps {
   product: IProduct;
@@ -8,20 +10,21 @@ interface IProps {
 
 const Product: React.FC<IProps> = ({ product }) => {
   return (
-    <Card className={"my-3 px-3 rounded"}>
-      <a href={`/product/${product._id}`}>
+    <Card className={"my-3 p-3 rounded"}>
+      <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant="top" />
-      </a>
+      </Link>
       <Card.Body>
-        <a href={`/product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <Card.Title as="div">
             <strong>{product.name}</strong>
           </Card.Title>
-        </a>
+        </Link>
         <Card.Text as="div">
-          <div className="my-3">
-            {product.rating} from {product.numReviews} reviews
-          </div>
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} reviews`}
+          />
         </Card.Text>
         <Card.Text as="h3">${product.price}</Card.Text>
       </Card.Body>
