@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { $apiAxios } from "../api";
 import Product from "../components/Product";
-import products from "../products";
+import { IProduct } from "../types/IProduct";
 
 export const HomeScreen = () => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    $apiAxios
+      .get("/product")
+      .then((response) => {
+        console.log("Response:", response);
+        setProducts(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <h1>Latest Products</h1>
