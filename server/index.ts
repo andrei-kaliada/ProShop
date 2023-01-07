@@ -1,9 +1,10 @@
-import express from "express";
-import product from "./data/products";
-import cors from "cors";
-import dotenv from "dotenv";
-import connectDB from "./config/db";
-import colors from "colors";
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import connectDB from './config/db';
+import colors from 'colors';
+import router from './routes';
+import { errorHandler, notFound } from './middleware/errorHandler';
 
 const app = express();
 app.use(cors());
@@ -11,16 +12,9 @@ dotenv.config();
 colors.enable();
 
 const PORT = process.env.PORT || 4301;
-
-app.get("/api/product", (req: any, res: any) => {
-  return res.json(product);
-});
-
-app.get("/api/product/:id", (req: any, res: any) => {
-  const id = req.params.id;
-  const singleProduct = product.find((p: any) => p._id === id);
-  return res.json(singleProduct);
-});
+app.use('/api', router);
+app.use(notFound);
+app.use(errorHandler);
 
 const start = () => {
   connectDB();

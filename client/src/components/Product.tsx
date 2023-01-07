@@ -1,8 +1,8 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { IProduct } from "../types/IProduct";
-import Rating from "./Rating";
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { IProduct } from '../types/product/IProduct';
+import Rating from './Rating';
 
 interface IProps {
   product: IProduct;
@@ -10,7 +10,7 @@ interface IProps {
 
 const Product: React.FC<IProps> = ({ product }) => {
   return (
-    <Card className={"my-3 p-3 rounded"}>
+    <Card className={'my-3 p-3 rounded'}>
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant="top" />
       </Link>

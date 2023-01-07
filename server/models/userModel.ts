@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const orderSchema = new Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -19,13 +19,12 @@ const orderSchema = new Schema(
     },
     paymentMethod: {
       type: String,
-      required: true,
     },
     paymentResult: {
-      id: { type: String, required: true },
-      status: { type: String, required: true },
-      update_time: { type: String, required: true },
-      email_address: { type: String, required: true },
+      id: { type: String },
+      status: { type: String },
+      update_time: { type: String },
+      email_address: { type: String },
     },
     taxPrice: {
       type: Number,
@@ -64,6 +63,6 @@ const orderSchema = new Schema(
   }
 );
 
-const Order = mongoose.model("Order", orderSchema);
+const User = mongoose.model('User', userSchema);
 
-export default Order;
+export default User;
